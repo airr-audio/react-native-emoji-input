@@ -433,7 +433,16 @@ class EmojiInput extends React.PureComponent {
 
     render() {
         const { selectedEmoji, offsetY } = this.state;
-        const { enableSearch, width, height, renderAheadOffset, keyboardShouldPersistTaps, keyboardBackgroundColor, footerContainerStyles } = this.props;
+        const { 
+            enableSearch, 
+            width, 
+            height, 
+            renderAheadOffset, 
+            keyboardShouldPersistTaps, 
+            keyboardBackgroundColor, 
+            footerContainerStyles,
+            noResultLabelTextStyle
+        } = this.props;
         return (
             <View
                 style={{
@@ -498,7 +507,7 @@ class EmojiInput extends React.PureComponent {
                     />
                 )}
                 {this.state.emptySearchResult && (
-                    <View style={styles.emptySearchResultContainer}>
+                    <View style={[styles.emptySearchResultContainer, noResultLabelTextStyle]}>
                         <Text>No search results.</Text>
                     </View>
                 )}
@@ -673,6 +682,7 @@ EmojiInput.propTypes = {
     keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
     keyboardBackgroundColor: PropTypes.string, 
     footerContainerStyles: PropTypes.object,
+    noResultLabelTextStyle: PropTypes.object,
 };
 
 const styles = {
