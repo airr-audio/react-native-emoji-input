@@ -7,7 +7,6 @@ import {
     Dimensions,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    AsyncStorage
 } from 'react-native';
 import {
     RecyclerListView,
@@ -16,6 +15,7 @@ import {
 } from 'recyclerlistview';
 import Triangle from 'react-native-triangle';
 import _ from 'lodash';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     responsiveFontSize
 } from 'react-native-responsive-dimensions';
