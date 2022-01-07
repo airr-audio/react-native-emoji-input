@@ -433,13 +433,13 @@ class EmojiInput extends React.PureComponent {
 
     render() {
         const { selectedEmoji, offsetY } = this.state;
-        const { enableSearch, width, renderAheadOffset } = this.props;
+        const { enableSearch, width, height, renderAheadOffset, keyboardShouldPersistTaps, keyboardBackgroundColor, footerContainerStyles } = this.props;
         return (
             <View
                 style={{
                     flex: 1,
                     width,
-                    backgroundColor: this.props.keyboardBackgroundColor,
+                    backgroundColor: keyboardBackgroundColor,
                     position: 'relative'
                 }}
             >
@@ -502,19 +502,22 @@ class EmojiInput extends React.PureComponent {
                         <Text>No search results.</Text>
                     </View>
                 )}
-                <RecyclerListView
-                    style={{ flex: 1 }}
-                    renderAheadOffset={renderAheadOffset}
-                    layoutProvider={this._layoutProvider}
-                    dataProvider={this.state.dataProvider}
-                    rowRenderer={this._rowRenderer}
-                    ref={component => (this._recyclerListView = component)}
-                    onScroll={this.handleScroll}
-                />
+                {this.state.dataProvider.getSize() > 0 &&
+                    <RecyclerListView
+                        style={{ flex: 1, height }}
+                        renderAheadOffset={renderAheadOffset}
+                        layoutProvider={this._layoutProvider}
+                        dataProvider={this.state.dataProvider}
+                        rowRenderer={this._rowRenderer}
+                        ref={component => (this._recyclerListView = component)}
+                        onScroll={this.handleScroll}
+                        keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                    />
+                }
                 {!this.state.searchQuery &&
                     this.props.showCategoryTab && (
                         <TouchableWithoutFeedback>
-                            <View style={styles.footerContainer}>
+                            <View style={[styles.footerContainer, footerContainerStyles]}>
                                 {_
                                     .drop(
                                         category,
@@ -639,7 +642,8 @@ EmojiInput.defaultProps = {
     categoryFontSize: 20,
     resetSearch: false,
     filterFunctions: [],
-    renderAheadOffset: 1500
+    renderAheadOffset: 1500,
+    keyboardShouldPersistTaps: 'always',
 };
 
 EmojiInput.propTypes = {
@@ -665,7 +669,10 @@ EmojiInput.propTypes = {
     defaultFrequentlyUsedEmoji: PropTypes.arrayOf(PropTypes.string),
     resetSearch: PropTypes.bool,
     filterFunctions: PropTypes.arrayOf(PropTypes.func),
-    renderAheadOffset: PropTypes.number
+    renderAheadOffset: PropTypes.number,
+    keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
+    keyboardBackgroundColor: PropTypes.string, 
+    footerContainerStyles: PropTypes.object,
 };
 
 const styles = {
