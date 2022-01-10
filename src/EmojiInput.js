@@ -259,7 +259,7 @@ class EmojiInput extends React.PureComponent {
             }
             this.emojiRenderer(result);
             setTimeout(() => {
-                if (this._isMounted) {
+                if (this._isMounted && this._recyclerListView) {
                     this._recyclerListView._pendingScrollToOffset = null;
                     this._recyclerListView.scrollToTop(false);
                 }
@@ -305,7 +305,7 @@ class EmojiInput extends React.PureComponent {
             .values()
             .filter(emoji => _.every(this.props.filterFunctions, fn => fn(emoji)))
             .each(e => {
-                if (_.has(categoryIndexMap, e.category)) {
+                if (e && _.has(categoryIndexMap, e.category)) {
                     tempEmoji[categoryIndexMap[e.category].idx].push(e);
                 }
             });
