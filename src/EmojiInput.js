@@ -441,7 +441,8 @@ class EmojiInput extends React.PureComponent {
             keyboardShouldPersistTaps, 
             keyboardBackgroundColor, 
             footerContainerStyles,
-            noResultLabelTextStyle
+            noResultLabelTextStyle,
+            onSearchInputFocus,
         } = this.props;
         return (
             <View
@@ -473,6 +474,7 @@ class EmojiInput extends React.PureComponent {
                         clearButtonMode={'always'}
                         placeholder={'Search emoji'}
                         autoCorrect={false}
+                        onFocus={onSearchInputFocus}
                         onChangeText={text => {
                             this.setState({
                                 searchQuery: text
