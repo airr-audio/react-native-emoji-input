@@ -450,7 +450,7 @@ class EmojiInput extends React.PureComponent {
                     flex: 1,
                     width,
                     backgroundColor: keyboardBackgroundColor,
-                    position: 'relative'
+                    flexDirection: 'column',
                 }}
             >
                 {enableSearch && (
@@ -515,7 +515,7 @@ class EmojiInput extends React.PureComponent {
                 )}
                 {this.state.dataProvider.getSize() > 0 &&
                     <RecyclerListView
-                        style={{ flex: 1, height }}
+                        style={{ flex: 1 }}
                         renderAheadOffset={renderAheadOffset}
                         layoutProvider={this._layoutProvider}
                         dataProvider={this.state.dataProvider}
@@ -697,7 +697,7 @@ const styles = {
         width: '100%',
         paddingVertical: 15,
         backgroundColor: '#fff',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     emptySearchResultContainer: {
         flex: 1,
