@@ -405,6 +405,9 @@ class EmojiInput extends React.PureComponent {
     handleScroll = (rawEvent, offsetX, offsetY) => {
         let idx = _(category).findLastIndex(c => c.y < offsetY);
         if (idx < 0) idx = 0;
+        if (this.state.offsetY === 0 && offsetY > 0 && this.props.onInitialScroll) {
+            this.props.onInitialScroll();
+        }
         this.setState({
             currentCategoryKey: category[idx].key,
             selectedEmoji: null,
@@ -685,6 +688,8 @@ EmojiInput.propTypes = {
     keyboardBackgroundColor: PropTypes.string, 
     footerContainerStyles: PropTypes.object,
     noResultLabelTextStyle: PropTypes.object,
+    onSearchInputFocus: PropTypes.func,
+    onInitialScroll: PropTypes.func,
 };
 
 const styles = {
