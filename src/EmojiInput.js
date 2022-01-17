@@ -7,6 +7,7 @@ import {
     Dimensions,
     TouchableOpacity,
     TouchableWithoutFeedback,
+    Keyboard,
 } from 'react-native';
 import {
     RecyclerListView,
