@@ -513,7 +513,7 @@ class EmojiInput extends React.PureComponent {
                             }
                         }}
                     />
-                    <TouchableOpacity style={{ paddingRight: 15 }} onPress={() => {
+                    <TouchableOpacity style={{ paddingRight: 15, display: this.state.previousLongestQuery.length ? 'flex':'none' }} onPress={() => {
                       this.textInput.clear();
                       Keyboard.dismiss();
                     }}>
