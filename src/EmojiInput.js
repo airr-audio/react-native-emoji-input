@@ -457,6 +457,7 @@ class EmojiInput extends React.PureComponent {
                 }}
             >
                 {enableSearch && (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <TextInput
                         ref={input => {
                             this.textInput = input;
@@ -472,6 +473,7 @@ class EmojiInput extends React.PureComponent {
                             paddingLeft: 15,
                             borderRadius: 15,
                             margin: 10,
+                            flexGrow: 1,
                         }}
                         returnKeyType={'search'}
                         clearButtonMode={'always'}
@@ -510,6 +512,13 @@ class EmojiInput extends React.PureComponent {
                             }
                         }}
                     />
+                    <TouchableOpacity style={{ paddingRight: 15 }} onPress={() => {
+                      this.textInput.clear();
+                      Keyboard.dismiss();
+                    }}>
+                      <Text style={{ color: '#0a84ff', fontSize: responsiveFontSize(2),}}>Cancel</Text>
+                    </TouchableOpacity>
+                </View>
                 )}
                 {this.state.emptySearchResult && (
                     <View style={[styles.emptySearchResultContainer, noResultLabelTextStyle]}>
